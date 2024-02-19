@@ -133,7 +133,7 @@ export default function UsersCreatePage() {
               });
 
               router.push(
-                `/admin/users${isAdmin ? "?isAdmin=true" : "isAdmin=false"}`
+                `/admin/users${isAdmin ? "?isAdmin=true" : "?isAdmin=false"}`
               );
             }}
           >
