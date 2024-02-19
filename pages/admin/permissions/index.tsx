@@ -38,6 +38,7 @@ export default function PermissionsPage() {
     }, 500);
   }, []);
   useEffect(() => {
+    setCurrentPage(1);
     if (sort !== null) {
       setPermissions(
         [...mock.permissions]

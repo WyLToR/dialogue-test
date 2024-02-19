@@ -39,6 +39,7 @@ export default function PagesPage() {
     }, 500);
   });
   useEffect(() => {
+    setCurrentPage(1);
     if (sort !== null) {
       setpages(
         [...mock.pages]

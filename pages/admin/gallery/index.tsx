@@ -40,6 +40,7 @@ export default function GalleryPage() {
     }, 500);
   }, []);
   useEffect(() => {
+    setCurrentPage(1);
     if (sort !== null) {
       setPictures(
         [...mock.gallery]

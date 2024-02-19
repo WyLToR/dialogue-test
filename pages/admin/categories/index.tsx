@@ -38,6 +38,7 @@ export default function CategoriesPage() {
     }, 500);
   }, []);
   useEffect(() => {
+    setCurrentPage(1);
     if (sort !== null) {
       setCategories(
         [...mock.categories]

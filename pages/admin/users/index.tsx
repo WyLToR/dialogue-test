@@ -41,6 +41,7 @@ export default function UsersPage() {
     }, 500);
   }, []);
   useEffect(() => {
+    setCurrentPage(1);
     if (sort !== null) {
       setUsers(
         [
