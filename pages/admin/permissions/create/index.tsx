@@ -13,16 +13,10 @@ export default function PermissionCreatePage() {
   const { logged } = useContext(LoginContext);
   const { mock, setMock } = useContext(MockContext);
   const { t } = useTranslation();
-  const [modified, setModified] = useState(
-    mock.permissions.find(
-      (permission: Permission) =>
-        permission.permissionId === router.query.permissionId
-    )
-  );
   const [form, setForm] = useState({
     permissionId: randomNumber(10),
-    permissionName: "" || modified?.permissionName,
-    permissionDetails: "" || modified?.permissionDetails,
+    permissionName: "",
+    permissionDetails: "",
     createdAt: randomDate(),
   });
   useEffect(() => {
@@ -36,8 +30,7 @@ export default function PermissionCreatePage() {
         <div className="shadow-sm p-6 pl-8 bg-inherit flex flex-col gap-4 dark:border-gray-800">
           <div className="flex justify-between items-center">
             <h1 className="text-3xl">
-              {router.query.permissionId ? t("existing") : t("new")}{" "}
-              {t("dataOfPermission")}
+              {t("new")} {t("dataOfPermission")}
             </h1>
             <Link
               className="pt-2 pb-2 pl-4 pr-4 rounded-md text-center-text-xl bg-gray-500 text-white w-fit "
@@ -49,8 +42,7 @@ export default function PermissionCreatePage() {
         </div>
         <div className="m-6 p-2 bg-gray-200 rounded-md dark:bg-gray-800  flex flex-col gap-6">
           <h1 className="text-2xl">
-            {router.query.permissionId ? t("existing") : t("new")}{" "}
-            {t("dataOfPermission")}
+            {t("new")} {t("dataOfPermission")}
           </h1>
           <form
             className="flex flex-col gap-6 p-6 rounded-md"
@@ -58,28 +50,10 @@ export default function PermissionCreatePage() {
               e.preventDefault();
               setMock((prevMock: any) => {
                 if (!prevMock) return null;
-
-                if (router.query.permissionId) {
-                  return {
-                    ...prevMock,
-                    permissions: prevMock.permissions.map(
-                      (permission: Permission) => {
-                        if (
-                          permission.permissionId === router.query.permissionId
-                        ) {
-                          return form;
-                        } else {
-                          return permission;
-                        }
-                      }
-                    ),
-                  };
-                } else {
-                  return {
-                    ...prevMock,
-                    permissions: [...prevMock.permissions, form],
-                  };
-                }
+                return {
+                  ...prevMock,
+                  permissions: [...prevMock.permissions, form],
+                };
               });
               router.push("/admin/permissions");
             }}
@@ -112,17 +86,21 @@ export default function PermissionCreatePage() {
                   required
                   className="border-2 shadow-sm text-xl p-2 rounded-md w-full dark:bg-gray-700 dark:text-white   dark:border-gray-500 outline-blue-500"
                   placeholder={t("permissionGroupDetail")}
+                  maxLength={500}
                   value={form.permissionDetails}
                   onChange={(e) =>
                     setForm({ ...form, permissionDetails: e.target.value })
                   }
                 ></textarea>
-                <span>{t('max500Character')}</span>
+                <div className="flex gap-2">
+                  <span>{form.permissionDetails.length} / 500</span>
+                  <span>{t("max500Character")}</span>
+                </div>
               </label>
             </div>
             <div>
               <button className="pt-2 pb-2 pl-4 pr-4 rounded-md text-center-text-xl bg-blue-500 text-white w-fit">
-                {router.query.permissionId ? t('modify') : t('create')}
+                {t("create")}
               </button>
             </div>
           </form>

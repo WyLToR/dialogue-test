@@ -14,15 +14,10 @@ export default function CategoriesCreatePage() {
   const { logged } = useContext(LoginContext);
   const { mock, setMock } = useContext(MockContext);
   const { t } = useTranslation();
-  const [modified, setModified] = useState(
-    mock?.categories.find(
-      (category: Category) => category.categoryId === router.query.categoryId
-    )
-  );
   const [form, setForm] = useState<Category | any>({
     categoryId: randomNumber(10),
-    categoryName: "" || modified?.categoryName,
-    categoryDetail: "" || modified?.categoryDetail,
+    categoryName: "",
+    categoryDetail: "",
     createdAt: randomDate().toISOString(),
   });
   useEffect(() => {
@@ -56,24 +51,10 @@ export default function CategoriesCreatePage() {
             className="flex flex-col gap-6 p-6 rounded-md"
             onSubmit={(e) => {
               e.preventDefault();
-              if (router.query.categoryId) {
-                setMock((prevMock) => ({
-                  ...prevMock!,
-                  categories: prevMock!.categories.map((category: Category) => {
-                    if (category.categoryId === router.query.categoryId) {
-                      return form;
-                    } else {
-                      return category;
-                    }
-                  }),
-                }));
-              } else {
-                setMock((prevMock) => ({
-                  ...prevMock!,
-                  categories: [...(prevMock?.categories || []), form],
-                }));
-              }
-
+              setMock((prevMock) => ({
+                ...prevMock!,
+                categories: [...(prevMock?.categories || []), form],
+              }));
               router.push("/admin/categories");
             }}
           >
@@ -116,7 +97,7 @@ export default function CategoriesCreatePage() {
             </div>
             <div>
               <button className="pt-2 pb-2 pl-4 pr-4 rounded-md text-center-text-xl bg-blue-500 text-white w-fit">
-                {router.query.categoryId ? t("modify") : t("create")}
+                {t("create")}
               </button>
             </div>
           </form>

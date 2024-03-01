@@ -18,16 +18,13 @@ export default function UsersCreatePage() {
   );
   const { t } = useTranslation();
   const [exist, setExist] = useState(false);
-  const [modified, setModified] = useState(
-    mock.users.find((user: User) => user.username === router.query.username)
-  );
   const [form, setForm] = useState({
-    email: "" || modified?.email,
-    username: "" || modified?.username,
+    email: "",
+    username: "",
     password: "",
     passwordAgain: "",
-    firstName: "" || modified?.firstName,
-    lastName: "" || modified?.lastName,
+    firstName: "",
+    lastName: "",
     img: "https://placehold.co/600x600",
     createdAt: randomDate().toISOString(),
     isAdmin,
@@ -51,8 +48,7 @@ export default function UsersCreatePage() {
         <div className="p-6 pl-8 bg-inherit flex flex-col gap-4 dark:border-gray-800">
           <div className="flex justify-between items-center">
             <h1 className="text-3xl">
-              {router.query.username ? t("existing") : t("new")}{" "}
-              {isAdmin ? t("dataOfAdmins") : t("dataOfUsers")}
+              {t("new")} {isAdmin ? t("dataOfAdmins") : t("dataOfUsers")}
             </h1>
             <Link
               className="pt-2 pb-2 pl-4 pr-4 rounded-md text-center-text-xl bg-gray-500 text-white w-fit"
@@ -67,8 +63,7 @@ export default function UsersCreatePage() {
         </div>
         <div className="m-4 p-2 flex flex-col gap-6 bg-gray-200 rounded-md dark:bg-gray-800">
           <h1 className="text-2xl">
-            {router.query.username ? t("existing") : t("new")}{" "}
-            {isAdmin ? t("dataOfAdmins") : t("dataOfUsers")}
+            {t("new")} {isAdmin ? t("dataOfAdmins") : t("dataOfUsers")}
           </h1>
           <form
             className="flex flex-col gap-6 p-6 rounded-md"
@@ -76,60 +71,23 @@ export default function UsersCreatePage() {
               e.preventDefault();
               setMock((prevMock: any) => {
                 if (!prevMock) return null;
-
-                if (router.query.username) {
-                  return {
-                    ...prevMock,
-                    users: prevMock.users.map((user: User) => {
-                      if (user.username === router.query.username) {
-                        if (user.username == logged?.username) {
-                          setLogged({
-                            email: form.email,
-                            username: form.username,
-                            password: form.password,
-                            firstName: form.firstName,
-                            lastName: form.lastName,
-                            img: form.img,
-                            createdAt: form.createdAt,
-                            isAdmin: form.isAdmin,
-                            permissions: form.permissions,
-                          });
-                        }
-                        return {
-                          email: form.email,
-                          username: form.username,
-                          password: form.password,
-                          firstName: form.firstName,
-                          lastName: form.lastName,
-                          img: form.img,
-                          createdAt: form.createdAt,
-                          isAdmin: form.isAdmin,
-                          permissions: form.permissions,
-                        };
-                      } else {
-                        return user;
-                      }
-                    }),
-                  };
-                } else {
-                  return {
-                    ...prevMock,
-                    users: [
-                      ...prevMock.users,
-                      {
-                        email: form.email,
-                        username: form.username,
-                        password: form.password,
-                        firstName: form.firstName,
-                        lastName: form.lastName,
-                        img: form.img,
-                        createdAt: form.createdAt,
-                        isAdmin: form.isAdmin,
-                        permissions: form.permissions,
-                      },
-                    ],
-                  };
-                }
+                return {
+                  ...prevMock,
+                  users: [
+                    ...prevMock.users,
+                    {
+                      email: form.email,
+                      username: form.username,
+                      password: form.password,
+                      firstName: form.firstName,
+                      lastName: form.lastName,
+                      img: form.img,
+                      createdAt: form.createdAt,
+                      isAdmin: form.isAdmin,
+                      permissions: form.permissions,
+                    },
+                  ],
+                };
               });
 
               router.push(
@@ -267,7 +225,7 @@ export default function UsersCreatePage() {
                   exist ? "bg-gray-300" : "bg-blue-500"
                 } pt-2 pb-2 pl-4 pr-4 rounded-md text-center-text-xl  text-white w-fit`}
               >
-                {router.query.username ? t("modify") : t("create")}
+                {t("create")}
               </button>
             </div>
           </form>

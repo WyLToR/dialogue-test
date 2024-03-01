@@ -14,16 +14,11 @@ export default function GalleryCreatePage() {
   const { logged } = useContext(LoginContext);
   const { mock, setMock } = useContext(MockContext);
   const { t } = useTranslation();
-  const [modified, setModified] = useState(
-    mock.gallery.find(
-      (picture: Picture) => picture.pictureId === router.query.pictureId
-    )
-  );
   const [form, setForm] = useState({
     pictureId: randomNumber(20),
-    pictureName: "" || modified?.pictureName,
-    pictureAlt: "" || modified?.pictureAlt,
-    pictureHref: "https://picsum.photos/500/400" || modified?.pictureHref,
+    pictureName: "",
+    pictureAlt: "",
+    pictureHref: "https://picsum.photos/500/400",
     createdAt: randomDate(),
   });
   useEffect(() => {
@@ -37,8 +32,7 @@ export default function GalleryCreatePage() {
         <div className="shadow-sm p-6 pl-8 bg-inherit flex flex-col gap-4">
           <div className="flex justify-between items-center">
             <h1 className="text-3xl">
-              {router.query.pictureId ? t("existing") : t("new")}{" "}
-              {t("dataOfPicture")}
+              {t("new")} {t("dataOfPicture")}
             </h1>
             <Link
               className="pt-2 pb-2 pl-4 pr-4 rounded-md text-center-text-xl bg-gray-500 text-white w-fit"
@@ -50,8 +44,7 @@ export default function GalleryCreatePage() {
         </div>
         <div className="m-6 rounded-md bg-gray-200 dark:bg-gray-800 p-2 flex flex-col gap-6">
           <h1 className="text-2xl">
-            {router.query.pictureId ? t("existing") : t("new")}{" "}
-            {t("dataOfPicture")}
+            {t("new")} {t("dataOfPicture")}
           </h1>
           <form
             className="flex flex-col gap-6 p-6 rounded-md"
@@ -59,24 +52,10 @@ export default function GalleryCreatePage() {
               e.preventDefault();
               setMock((prevMock: any) => {
                 if (!prevMock) return null;
-
-                if (router.query.pictureId) {
-                  return {
-                    ...prevMock,
-                    gallery: prevMock.gallery.map((picture: Picture) => {
-                      if (picture.pictureId === router.query.pictureId) {
-                        return form;
-                      } else {
-                        return picture;
-                      }
-                    }),
-                  };
-                } else {
-                  return {
-                    ...prevMock,
-                    gallery: [...prevMock.gallery, form],
-                  };
-                }
+                return {
+                  ...prevMock,
+                  gallery: [...prevMock.gallery, form],
+                };
               });
               router.push("/admin/gallery");
             }}
@@ -84,12 +63,12 @@ export default function GalleryCreatePage() {
             <div className="flex gap-4">
               <label className="flex flex-col flex-1">
                 <span className="text-xl">
-                  {t('pictureName')}: <span className="text-red-500">*</span>
+                  {t("pictureName")}: <span className="text-red-500">*</span>
                 </span>
                 <input
                   type="text"
                   className="border-2 shadow-sm text-xl p-2 rounded-md w-full dark:bg-gray-700 dark:text-white   dark:border-gray-500 outline-blue-500"
-                  placeholder={`${t('pictureName')}`}
+                  placeholder={`${t("pictureName")}`}
                   value={form.pictureName}
                   required
                   onChange={(e) =>
@@ -101,13 +80,13 @@ export default function GalleryCreatePage() {
             <div className="flex flex-col gap-4">
               <label className="flex flex-col flex-1">
                 <span className="text-xl">
-                  {t('pictureAlt')}: <span className="text-red-500">*</span>
+                  {t("pictureAlt")}: <span className="text-red-500">*</span>
                 </span>
                 <input
                   type="text"
                   required
                   className="border-2 shadow-sm text-xl p-2 rounded-md w-full dark:bg-gray-700 dark:text-white   dark:border-gray-500 outline-blue-500"
-                  placeholder={`${t('pictureAlt')}`}
+                  placeholder={`${t("pictureAlt")}`}
                   value={form.pictureAlt}
                   onChange={(e) =>
                     setForm({ ...form, pictureAlt: e.target.value })
@@ -120,8 +99,7 @@ export default function GalleryCreatePage() {
                 <div className="mb-3">
                   <label className="mb-2 inline-block text-neutral-700 dark:text-neutral-200">
                     <span className="text-xl">
-                      {t('pictureFile')}:
-                      <span className="text-red-500">*</span>
+                      {t("pictureFile")}:<span className="text-red-500">*</span>
                     </span>
                   </label>
                   <input
@@ -134,7 +112,7 @@ export default function GalleryCreatePage() {
             </div>
             <div>
               <button className="pt-2 pb-2 pl-4 pr-4 rounded-md text-center-text-xl bg-blue-500 text-white w-fit">
-                {router.query.pictureId ? t('modify') : t('create')}
+                {t("create")}
               </button>
             </div>
           </form>

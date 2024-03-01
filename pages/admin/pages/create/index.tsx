@@ -13,14 +13,11 @@ export default function PagesCreatePage() {
   const { logged } = useContext(LoginContext);
   const { mock, setMock } = useContext(MockContext);
   const { t } = useTranslation();
-  const [modified, setModified] = useState(
-    mock.pages.find((page: Page) => page.pageId === router.query.pageId)
-  );
   const [form, setForm] = useState({
     pageId: randomNumber(10),
-    pageName: "" || modified?.pageName,
-    pageHref: "" || modified?.pageHref,
-    pageVisible: false || modified?.pageVisible,
+    pageName: "",
+    pageHref: "",
+    pageVisible: false,
     createdAt: randomDate(),
   });
   useEffect(() => {
@@ -34,7 +31,7 @@ export default function PagesCreatePage() {
         <div className="shadow-sm p-6 pl-8 bg-inherit flex flex-col gap-4">
           <div className="flex justify-between items-center">
             <h1 className="text-3xl">
-              {router.query.pageId ? t("existing") : t("new")} {t("dataOfPage")}
+              {t("new")} {t("dataOfPage")}
             </h1>
             <Link
               className="pt-2 pb-2 pl-4 pr-4 rounded-md text-center-text-xl bg-gray-500 text-white w-fit"
@@ -46,7 +43,7 @@ export default function PagesCreatePage() {
         </div>
         <div className="m-6 rounded-md bg-gray-200 dark:bg-gray-800 p-2 flex flex-col gap-6">
           <h1 className="text-2xl">
-            {router.query.pageId ? t("existing") : t("new")} {t("dataOfPage")}ń{" "}
+            {t("new")} {t("dataOfPage")}
           </h1>
           <div className="flex justify-between m-5">
             <button className="w-1/2 flex justify-center items-center border-b-2 border-b-blue-700 pb-4">
@@ -62,24 +59,10 @@ export default function PagesCreatePage() {
               e.preventDefault();
               setMock((prevMock: any) => {
                 if (!prevMock) return null;
-
-                if (router.query.pageId) {
-                  return {
-                    ...prevMock,
-                    pages: prevMock.pages.map((page: Page) => {
-                      if (page.pageId === router.query.pageId) {
-                        return form;
-                      } else {
-                        return page;
-                      }
-                    }),
-                  };
-                } else {
-                  return {
-                    ...prevMock,
-                    pages: [...prevMock.pages, form],
-                  };
-                }
+                return {
+                  ...prevMock,
+                  pages: [...prevMock.pages, form],
+                };
               });
               router.push("/admin/pages");
             }}
@@ -156,7 +139,7 @@ export default function PagesCreatePage() {
             </div>
             <div>
               <button className="pt-2 pb-2 pl-4 pr-4 rounded-md text-center-text-xl bg-blue-500 text-white w-fit">
-                {router.query.pageId ? t("modify") : t("create")}
+                {t("create")}
               </button>
             </div>
           </form>
