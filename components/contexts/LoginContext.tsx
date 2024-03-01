@@ -1,4 +1,6 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useState, useContext, useEffect } from "react";
+import { MockContext } from "./MockContext";
+import User from "@/src/interfaces/user";
 
 interface ILogged {
   email: string;
@@ -25,6 +27,18 @@ export const LoginContext = createContext<ILoginContext>(initialContext);
 
 export function LoginProvider({ children }: { children: React.ReactNode }) {
   const [logged, setLogged] = useState<ILogged | null>(null);
+  const { mock } = useContext(MockContext);
+  useEffect(() => {
+    if (localStorage.getItem("logged") == "true") {
+      const userName = localStorage.getItem("username");
+      const finder = mock.users.find(
+        (user: User) => user.username === userName
+      );
+      if (finder) {
+        setLogged({ ...finder });
+      }
+    }
+  }, []);
   return (
     <LoginContext.Provider value={{ logged, setLogged }}>
       {children}
