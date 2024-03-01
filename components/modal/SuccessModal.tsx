@@ -12,24 +12,33 @@ export default function SuccessModal({
   children: React.ReactNode;
 }) {
   const { t } = useTranslation();
+  useEffect(() => {
+    const handleKeyDown = (event: { key: string }) => {
+      if (event.key === "Escape") {
+        setModal(false);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [modal, setModal]);
   return (
     <>
-      <div className="relative flex justify-center items-center">
+      <div className="relative flex justify-center items-center h-full">
         <ReactModal
           shouldCloseOnEsc={true}
           isOpen={modal}
           ariaHideApp={false}
-          overlayClassName={{
-            base: "fixed inset-0 bg-opacity-50 bg-black",
-            afterOpen: "opacity-100",
-            beforeClose: "opacity-0",
-          }}
           className={{
-            base: "flex h-full items-center justify-center flex-col",
-            afterOpen:
-              "opacity-100 transition-all duration-500 ease-in-out transform translate-z-0",
-            beforeClose: "opacity-0 -translate-x-full duration-300",
+            base: "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-300 dark:bg-gray-800 opacity-90 rounded-lg p-8",
+            afterOpen: "opacity-100 transition-all duration-500 ease-in-out",
+            beforeClose: "opacity-0 duration-300",
           }}
+          onRequestClose={() => setModal(!modal)}
+          shouldCloseOnOverlayClick={true}
         >
           <div className="rounded-lg px-16 py-14 z-10">
             <div className="flex justify-center flex-col items-center">
