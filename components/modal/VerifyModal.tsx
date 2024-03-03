@@ -40,6 +40,11 @@ export default function VerifyModal({
             afterOpen: "opacity-100 transition-all duration-500 ease-in-out",
             beforeClose: "opacity-0 duration-300",
           }}
+          overlayClassName={{
+            base: "bg-inherit",
+            afterOpen: "",
+            beforeClose: "",
+          }}
           onRequestClose={() => setModal(!modal)}
           shouldCloseOnOverlayClick={true}
         >

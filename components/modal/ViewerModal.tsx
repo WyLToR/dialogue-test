@@ -51,9 +51,14 @@ export default function ViewerModal({
           isOpen={modal}
           ariaHideApp={false}
           className={{
-            base: "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-300 dark:bg-gray-800 opacity-90 rounded-lg p-8",
+            base: "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-300 dark:bg-gray-800 rounded-lg p-8",
             afterOpen: "opacity-100 transition-all duration-500 ease-in-out",
             beforeClose: "opacity-0 duration-300",
+          }}
+          overlayClassName={{
+            base: "bg-inherit",
+            afterOpen: "",
+            beforeClose: "",
           }}
           onRequestClose={() => setModal(!modal)}
           shouldCloseOnOverlayClick={true}
