@@ -5,7 +5,7 @@ import randomDate from "@/src/utils/randomDate";
 import randomNumber from "@/src/utils/randomNumber";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 export default function CategoriesCreatePage() {

@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import { useContext, useEffect, useState } from "react";
 import { LoginContext } from "../contexts/LoginContext";
 import { MenuContext } from "../contexts/MenuContext";

@@ -1,16 +1,14 @@
-import { LoginContext } from "@/components/contexts/LoginContext";
 import { MockContext } from "@/components/contexts/MockContext";
 import Permission from "@/src/interfaces/permission";
 import randomDate from "@/src/utils/randomDate";
 import randomNumber from "@/src/utils/randomNumber";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 export default function PermissionCreatePage() {
   const router = useRouter();
-  const { logged } = useContext(LoginContext);
   const { mock, setMock } = useContext(MockContext);
   const { t } = useTranslation();
   const [modified, setModified] = useState(

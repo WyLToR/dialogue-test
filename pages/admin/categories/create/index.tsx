@@ -1,12 +1,11 @@
 import { LoginContext } from "@/components/contexts/LoginContext";
 import { MockContext } from "@/components/contexts/MockContext";
-import data from "@/mock";
 import Category from "@/src/interfaces/category";
 import randomDate from "@/src/utils/randomDate";
 import randomNumber from "@/src/utils/randomNumber";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 export default function CategoriesCreatePage() {

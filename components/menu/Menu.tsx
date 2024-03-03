@@ -1,14 +1,12 @@
 import React, { useContext, useEffect, useRef } from "react";
 import { MenuContext } from "../contexts/MenuContext";
 import Link from "next/link";
-import i18n from "i18next";
-
 import { LoginContext } from "../contexts/LoginContext";
 import { Language, LanguageContext } from "../contexts/LanguageContext";
 import { useTranslation } from "react-i18next";
 export const Menu = ({ children }: { children: React.ReactNode }) => {
   const { menu, setMenu } = useContext(MenuContext);
-  const { logged, setLogged } = useContext(LoginContext);
+  const { setLogged } = useContext(LoginContext);
   const { language, setLanguage } = useContext(LanguageContext);
   const { t } = useTranslation();
   const menuRef = useRef<HTMLDivElement | null>(null);
@@ -226,6 +224,8 @@ export const Menu = ({ children }: { children: React.ReactNode }) => {
               onClick={() => {
                 handleLogin();
                 handleMenu();
+                localStorage.removeItem('username')
+                localStorage.removeItem('logged')
               }}
             >
               <div className="flex gap-5 m-5 fill-gray-800 dark:fill-gray-300">

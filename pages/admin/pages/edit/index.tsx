@@ -1,4 +1,3 @@
-import { LoginContext } from "@/components/contexts/LoginContext";
 import { MockContext } from "@/components/contexts/MockContext";
 import Page from "@/src/interfaces/page";
 import randomDate from "@/src/utils/randomDate";
@@ -10,7 +9,6 @@ import { useTranslation } from "react-i18next";
 
 export default function PagesCreatePage() {
   const router = useRouter();
-  const { logged } = useContext(LoginContext);
   const { mock, setMock } = useContext(MockContext);
   const { t } = useTranslation();
   const [modified, setModified] = useState(

@@ -1,7 +1,5 @@
-import { LoginContext } from "@/components/contexts/LoginContext";
 import { MockContext } from "@/components/contexts/MockContext";
 import SuccessModal from "@/components/modal/SuccessModal";
-import Modal from "@/components/modal/SuccessModal";
 import VerifyModal from "@/components/modal/VerifyModal";
 import Paginator from "@/components/paginator/Paginator";
 import Spinner from "@/components/spinner/Spinner";
@@ -18,7 +16,6 @@ import { useTranslation } from "react-i18next";
 export default function PermissionsPage() {
   const { mock, setMock } = useContext(MockContext);
   const router = useRouter();
-  const { logged } = useContext(LoginContext);
   const [modal, setModal] = useState(false);
   const [sort, setSort] = useState<{
     sortBy: string | null;

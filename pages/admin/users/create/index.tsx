@@ -1,4 +1,3 @@
-import { LoginContext } from "@/components/contexts/LoginContext";
 import { MockContext } from "@/components/contexts/MockContext";
 import User from "@/src/interfaces/user";
 import randomDate from "@/src/utils/randomDate";
@@ -9,7 +8,6 @@ import { useTranslation } from "react-i18next";
 
 export default function UsersCreatePage() {
   const router = useRouter();
-  const { logged, setLogged } = useContext(LoginContext);
   const { mock, setMock } = useContext(MockContext);
   const [isAdmin, setIsAdmin] = useState(
     router.query.super == "false" &&
