@@ -137,7 +137,7 @@ export default function PagesCreatePage() {
                 role="switch"
                 id="flexSwitchCheckDefault"
                 checked={form.pageVisible}
-                onClick={(e) =>
+                onChange={(e) =>
                   setForm({ ...form, pageVisible: !form.pageVisible })
                 }
               />

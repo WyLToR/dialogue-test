@@ -44,7 +44,7 @@ export default function PermissionsPage() {
     if (sort !== null) {
       setPermissions(
         [...mock.permissions]
-        .sort((a: any, b: any) => compareElements(a, b, { sort }))
+          .sort((a: any, b: any) => compareElements(a, b, { sort }))
           .filter((permission: Permission | any) =>
             search
               ? permission.permissionName.toLocaleLowerCase().includes(search)
@@ -72,12 +72,23 @@ export default function PermissionsPage() {
   }, [verify]);
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
+    const page = Number(searchParams.get("page"));
     setSearch(searchParams.get("search") || "");
     setSort({
       sortBy: searchParams.get("sortBy"),
       orderBy: searchParams.get("orderBy"),
     });
-  }, [router.query.search, router.query.sortBy, router.query.orderBy]);
+    if (page && !isNaN(page) && page >= 1) {
+      setCurrentPage(page);
+    } else {
+      setCurrentPage(1);
+    }
+  }, [
+    router.query.search,
+    router.query.sortBy,
+    router.query.orderBy,
+    router.query.page,
+  ]);
   return (
     <>
       <VerifyModal
@@ -154,4 +165,4 @@ export default function PermissionsPage() {
       </section>
     </>
   );
-} 
+}

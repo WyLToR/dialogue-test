@@ -217,7 +217,6 @@ export default function RenderTable({
                   <button
                     className="relative w-6 h-6"
                     onClick={() => {
-                      console.log("galleryTable", idx);
                       setViewModal(true);
                     }}
                   >

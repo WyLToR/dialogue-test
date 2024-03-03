@@ -42,12 +42,23 @@ export default function GalleryPage() {
   }, []);
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
+    const page = Number(searchParams.get("page"));
     setSearch(searchParams.get("search") || "");
     setSort({
       sortBy: searchParams.get("sortBy"),
       orderBy: searchParams.get("orderBy"),
     });
-  }, [router.query.search, router.query.sortBy, router.query.orderBy]);
+    if (page && !isNaN(page) && page >= 1) {
+      setCurrentPage(page);
+    } else {
+      setCurrentPage(1);
+    }
+  }, [
+    router.query.search,
+    router.query.sortBy,
+    router.query.orderBy,
+    router.query.page,
+  ]);
   useEffect(() => {
     setCurrentPage(1);
     if (sort !== null) {
