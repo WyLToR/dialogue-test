@@ -20,11 +20,6 @@ export default function PagesCreatePage() {
     pageVisible: false,
     createdAt: randomDate(),
   });
-  useEffect(() => {
-    if (!logged?.email) {
-      router.push("/");
-    }
-  }, []);
   return (
     <>
       <section className={`flex flex-col gap-5`}>
@@ -131,7 +126,7 @@ export default function PagesCreatePage() {
                 role="switch"
                 id="flexSwitchCheckDefault"
                 checked={form.pageVisible}
-                onClick={(e) =>
+                onChange={() =>
                   setForm({ ...form, pageVisible: !form.pageVisible })
                 }
               />

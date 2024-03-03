@@ -1,6 +1,5 @@
 import { LoginContext } from "@/components/contexts/LoginContext";
 import { MockContext } from "@/components/contexts/MockContext";
-import data from "@/mock";
 import Category from "@/src/interfaces/category";
 import randomDate from "@/src/utils/randomDate";
 import randomNumber from "@/src/utils/randomNumber";
@@ -25,11 +24,6 @@ export default function CategoriesCreatePage() {
     categoryDetail: modified?.categoryDetail,
     createdAt: randomDate().toISOString(),
   });
-  useEffect(() => {
-    if (!logged?.email) {
-      router.push("/");
-    }
-  }, []);
   return (
     <>
       <section className={`flex flex-col gap-5`}>

@@ -26,11 +26,6 @@ export default function GalleryCreatePage() {
     pictureHref: modified?.pictureHref,
     createdAt: randomDate(),
   });
-  useEffect(() => {
-    if (!logged?.email) {
-      router.push("/");
-    }
-  }, []);
   return (
     <>
       <section className={`flex flex-col gap-5`}>

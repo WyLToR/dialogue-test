@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-export default function Home({ usersData }: any) {
+export default function Home() {
   const [form, setForm] = useState({
     email: "admin@admin.com",
     password: "admin",
@@ -20,7 +20,11 @@ export default function Home({ usersData }: any) {
 
   const router = useRouter();
   const { t } = useTranslation();
-  useEffect(() => {});
+  useEffect(()=>{
+    if(logged?.username){
+      router.push('/admin')
+    }
+  },[])
   return (
     <>
       {logged?.email || (
@@ -88,6 +92,11 @@ export default function Home({ usersData }: any) {
                     );
                     if (finder) {
                       setLogged({ ...finder });
+                      localStorage.setItem("logged", JSON.stringify(true));
+                      localStorage.setItem(
+                        "username",
+                        finder.username
+                      );
                       router.push("/admin");
                     } else {
                       setValid(false);

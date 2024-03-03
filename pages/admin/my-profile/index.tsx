@@ -31,9 +31,6 @@ export default function MyProfilePage() {
     img: "",
   });
   useEffect(() => {
-    if (!logged?.email) {
-      router.push("/");
-    }
     setTimeout(() => {
       setIsClient(true);
     }, 500);

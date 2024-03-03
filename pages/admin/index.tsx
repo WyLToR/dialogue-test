@@ -1,25 +1,16 @@
-import { LoginContext } from "@/components/contexts/LoginContext";
-import { useRouter } from "next/router";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import Link from "next/link";
 import { MockContext } from "@/components/contexts/MockContext";
 import { useTranslation } from "react-i18next";
 export default function AdminPage() {
-  const { logged } = useContext(LoginContext);
   const { mock } = useContext(MockContext);
-  const router = useRouter();
   const { t } = useTranslation();
-  useEffect(() => {
-    if (!logged?.email) {
-      router.push("/");
-    }
-  });
   return (
     <>
       <div className="shadow-sm p-6 pl-8 bg-inherit max-h-full">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <Link
-            href={{ pathname: "/admin/my-profile" }}
+            href={{ pathname: "/admin/my-profile"}}
             className="rounded-lg bg-gray-200 dark:bg-gray-800 flex justify-center items-center flex-col p-6"
           >
             <span className="w-16 h-16 mb-4 fill-gray-800 dark:fill-gray-300">

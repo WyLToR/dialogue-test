@@ -21,11 +21,6 @@ export default function GalleryCreatePage() {
     pictureHref: "https://picsum.photos/500/400",
     createdAt: randomDate(),
   });
-  useEffect(() => {
-    if (!logged?.email) {
-      router.push("/");
-    }
-  }, []);
   return (
     <>
       <section className={`flex flex-col gap-5`}>

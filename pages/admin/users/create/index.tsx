@@ -31,11 +31,6 @@ export default function UsersCreatePage() {
     permissions: [],
   });
   useEffect(() => {
-    if (!logged?.email) {
-      router.push("/");
-    }
-  }, []);
-  useEffect(() => {
     if (!router.query.username) {
       setExist(
         mock.users.some((user: User) => form.username === user.username)

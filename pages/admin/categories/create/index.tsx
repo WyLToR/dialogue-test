@@ -20,11 +20,6 @@ export default function CategoriesCreatePage() {
     categoryDetail: "",
     createdAt: randomDate().toISOString(),
   });
-  useEffect(() => {
-    if (!logged?.email) {
-      router.push("/");
-    }
-  }, []);
   return (
     <>
       <section className={`flex flex-col gap-5`}>
