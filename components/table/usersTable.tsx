@@ -265,7 +265,7 @@ export default function RenderTable({
                 className="hidden xl:table-cell px-6 py-3 text-left text-xs font-medium uppercase"
               >
                 <div className="flex justify-between items-center">
-                  {t("modified")}
+                  {t("createdAt")}
                   <div className="flex">
                     <button
                       onClick={() =>
